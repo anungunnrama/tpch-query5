@@ -1,4 +1,4 @@
-#include "query5.hpp"
+#include "../include/query5.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,6 +8,7 @@
 #include <sstream>
 #include <algorithm>
 #include <map>
+#include <chrono>
 
 // TODO: Include additional headers as needed
 
@@ -26,9 +27,10 @@ int main(int argc, char* argv[]) {
         std::cerr << "Failed to read TPCH data." << std::endl;
         return 1;
     }
-
+    
+    auto read_start = std::chrono::high_resolution_clock::now();
     std::map<std::string, double> results;
-
+    
     if (!executeQuery5(r_name, start_date, end_date, num_threads, customer_data, orders_data, lineitem_data, supplier_data, nation_data, region_data, results)) {
         std::cerr << "Failed to execute TPCH Query 5." << std::endl;
         return 1;
@@ -38,7 +40,11 @@ int main(int argc, char* argv[]) {
         std::cerr << "Failed to output results." << std::endl;
         return 1;
     }
+    auto read_end = std::chrono::high_resolution_clock::now();
+    auto read_duration = std::chrono::duration_cast<std::chrono::milliseconds>(read_end - read_start);
+    
 
     std::cout << "TPCH Query 5 implementation completed." << std::endl;
+    std::cout << "Duration to execute : " << read_duration.count() << std::endl;
     return 0;
 } 

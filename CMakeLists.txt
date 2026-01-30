@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+
 set( CMAKE_CXX_COMPILER "C:/MinGW/bin/g++.exe" )
 set( CMAKE_C_COMPILER "C:/MinGW/bin/gcc.exe" )
 
@@ -19,4 +20,5 @@ find_package(Threads REQUIRED)
 target_link_libraries(tpch_query5 PRIVATE Threads::Threads)
 
 # Install target (optional)
+
 # install(TARGETS tpch_query5 DESTINATION bin) 
